@@ -1,11 +1,89 @@
-<!DOCTYPE html>
+<!-- 
+  This demo site is temporarily adapted from gfl2ordnance.github.io (public GitHub repo) 
+  for demonstration purposes. All original design and layout credit goes to the original author. 
+-->
+<!DOCTYPE HTML>
 <html>
-<head>
-  <title>David's Portfolio</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>Hello, I'm David. Welcome to my portfolio site!</h1>
-  <p>This is my portfolio site hosted on AWS.</p>
-</body>
+	<head>
+		<title>Rick's Business Demo</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<header id="header">
+				<div class="logo" style="background-image: url('images/02.png')"></div>
+				<div class="content">
+					<div class="inner">
+						<h1>Rick's Business Demo</h1>
+						<p>This website is a live AWS-hosted demonstration, powered by Amazon S3 and CloudFront.
+						It's designed to show what a clean, fast, and scalable site could look like for your business.</p>
+					</div>
+				</div>
+				<nav>
+					<ul>
+						<li><a href="#intro">Intro</a></li>
+						<li><a href="#AboutUs">About Us</a></li>
+						<li><a href="#Apply">Contact</a></li>
+					</ul>
+				</nav>
+			</header>
+
+			<div id="main">
+
+				<article id="intro">
+					<h2 class="major">Intro</h2>
+					<span class="image main"><img src="images/10.jpg" alt="" /></span>
+					<p>Welcome! This site is a working example of a business landing page hosted entirely on the AWS cloud. 
+					With blazing-fast content delivery via CloudFront and scalable storage through Amazon S3, 
+					your website can perform at an enterprise level—without enterprise-level costs.</p>
+					<p>This temporary demo shows how we can take a sleek, custom layout and deploy it globally in minutes. 
+					Everything you see is version-controlled through GitHub and auto-deployed using GitHub Actions.</p>
+				</article>
+
+				<article id="AboutUs">
+					<h2 class="major">About Us</h2>
+					<span class="image main"><img src="images/Marshie.jpg" alt="" /></span>
+					<p>Rick’s Business is focused on delivering high-quality solutions with a professional, approachable style. 
+					Whether it's a product showcase, service offering, or a simple contact portal—this site gives a live 
+					example of what we can create for your brand.</p>
+					<p>This layout is customizable, mobile-friendly, and backed by reliable AWS infrastructure. 
+					As your needs grow, the platform grows with you—whether you need e-commerce, media galleries, 
+					or blog content integration.</p>
+				</article>
+
+				<article id="Apply">
+					<h2 class="major">Contact</h2>
+					<span class="image main"><img src="images/11.jpg" alt="" /></span>
+					<p>This demo site was built by David and hosted on AWS. 
+					If you'd like to explore building a professional site like this for your business, 
+					reach out anytime—or just imagine your brand on this layout and let the ideas flow.</p>
+					<p>For now, these buttons can be repurposed later to link to contact forms, 
+					appointment calendars, or social media platforms.</p>
+				</article>
+
+			</div>
+
+			<footer id="footer">
+				<p class="copyright">
+					&copy; Rick's Business Demo. Powered by AWS. Design adapted from gfl2ordnance.github.io.
+				</p>
+			</footer>
+
+		</div>
+
+		<div id="bg"></div>
+
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script>document.addEventListener('contextmenu', function(e) {e.preventDefault();});</script>
+		<script>document.addEventListener('keydown', function(e) {if ((e.key === 'Power' || e.keyCode === 80) ||(e.key === 'VolumeDown' || e.keyCode === 86)) {showProtectionMessage();}});</script>
+	</body>
 </html>
