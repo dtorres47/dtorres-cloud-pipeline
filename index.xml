@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>David Torres</title>
+    <title>Home on David Torres</title>
     <link>https://www.davetorres.net/</link>
-    <description>Recent content on David Torres</description>
-    <generator>Hugo -- 0.146.5</generator>
+    <description>Recent content in Home on David Torres</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate></lastBuildDate>
+    <lastBuildDate>Thu, 17 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://www.davetorres.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>https://www.davetorres.net/about/</link>
+      <pubDate>Thu, 17 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://www.davetorres.net/about/</guid>
+      <description>&lt;p&gt;I’m &lt;strong&gt;David Torres&lt;/strong&gt;, a software developer with hands‑on experience in full‑stack web development and cloud deployment:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Languages &amp;amp; Frameworks&lt;/strong&gt;: C#, MS SQL, Angular, TypeScript, VB.NET, Python&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Projects&lt;/strong&gt;:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;DAM App&lt;/strong&gt;: Angular/TypeScript front‑end with C# Web API&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Snow App&lt;/strong&gt;: Data processing and automation in Python&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Cloud &amp;amp; DevOps&lt;/strong&gt;:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Static Hosting&lt;/strong&gt; on AWS S3 + CloudFront&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;CI/CD&lt;/strong&gt; with GitHub Actions&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Static Site Generation&lt;/strong&gt; with Hugo&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;I built this portfolio to showcase my technical expertise, attention to detail, and ability to architect scalable, maintainable solutions. Feel free to browse my work and reach out if you’d like to collaborate on your next project!&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>

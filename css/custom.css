@@ -1,0 +1,24 @@
+/* custom.css – force full dark mode */
+
+html, body {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
+}
+
+/* Header and footer */
+.site-header,
+.site-footer {
+  background-color: #1e1e1e !important;
+}
+
+/* Links */
+a {
+  color: #80cbc4 !important;
+}
+
+/* Any card backgrounds or panels */
+.card,
+.panel {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+}
