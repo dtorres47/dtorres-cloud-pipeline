@@ -1,15 +1,13 @@
 #!/usr/bin/env bash
 set -e
 
-# 1. Build Go server binary
-cd stream-overlay
+# 1. Tidy and build the Go binary from the cmd/stream-overlay folder
 go mod tidy
-go build -o ../build/stream-overlay-server ./cmd/stream-overlay
+go build -o build/stream-overlay-server ./cmd/stream-overlay
 
-# 2. Copy static assets
-cd ..
+# 2. Copy static web assets (overlay.html, panel.html) into the build area
 rm -rf build/stream-overlay-web
 mkdir -p build/stream-overlay-web
-cp -R stream-overlay/web/* build/stream-overlay-web/
+cp cmd/stream-overlay/web/* build/stream-overlay-web/
 
-echo "✅ Build complete: build/stream-overlay-server + web files"
+echo "✅ Build complete: build/stream-overlay-server + static web files"
