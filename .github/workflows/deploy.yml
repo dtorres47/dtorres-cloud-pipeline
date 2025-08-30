@@ -1,0 +1,15 @@
+- name: Deploy static site
+  env:
+    AWS_S3_BUCKET: david-portfolio-site
+    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    AWS_REGION: us-east-1
+  run: |
+    # 1. Copy overlay.html to bucket root as index.html
+    aws s3 cp build/stream-overlay-web/overlay.html s3://$AWS_S3_BUCKET/index.html --acl public-read
+    
+    # 2. Sync the rest under /stream-overlay-web/ (optional delete)
+    aws s3 sync build/stream-overlay-web s3://$AWS_S3_BUCKET/stream-overlay-web --acl public-read --delete
+    
+    # 3. Upload your Go binary if needed
+    aws s3 cp build/stream-overlay-server s3://$AWS_S3_BUCKET/bin/stream-overlay-server --acl public-read
