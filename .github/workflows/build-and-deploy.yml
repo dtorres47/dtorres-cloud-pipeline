@@ -14,6 +14,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # DEBUG: list everything so we can see the layout
+      - name: Show directory structure
+        run: |
+          echo "===== Root directory ====="
+          ls -la .
+          echo "===== Recursive listing ====="
+          ls -R .
+
       # 2. Make sure build.sh is executable
       - name: Enable build script
         run: chmod +x ./build.sh
