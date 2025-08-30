@@ -1,4 +1,4 @@
-name: Build & Deploy Site & Stream-Overlay
+name: Build & Deploy Stream Overlay to S3
 
 on:
   push:
@@ -10,52 +10,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Check out your code
-      - name: Checkout repository
+      # 1. Check out the repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. (If you have a Hugo site) Set up Hugo and build it
-      #- name: Setup Hugo
-      #  uses: peaceiris/actions-hugo@v2
-      #  with:
-      #    hugo-version: '0.118.0'
-      #- name: Build Hugo site
-      #  run: hugo --minify
-
-      # 3. Set up Go for your stream-overlay build
+      # 2. Set up Go (needed by build.sh)
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
           go-version: '1.24.x'
 
-      # 4. Make sure build.sh is executable
-      - name: Enable build script
+      # 3. Ensure build.sh is executable
+      - name: Make build script executable
         run: chmod +x ./build.sh
 
-      # 5. Run your build script (compiles Go & copies static demo assets)
-      - name: Build stream-overlay demo
-        run: ./build.sh
-
-      # 6. Prepare a unified public folder
-      - name: Assemble public folder
+      # 4. Run your build.sh to produce the build/ folder
+      - name: Run build.sh
         run: |
-          # Hugo output goes to public/
-          rm -rf deploy-package
-          mkdir -p deploy-package
-          cp -R public/* deploy-package/
-          # Copy your overlay demo into a subfolder
-          mkdir -p deploy-package/overlay-demo
-          cp build/stream-overlay-server deploy-package/overlay-demo/
-          cp -R build/stream-overlay-web/* deploy-package/overlay-demo/
+          ./build.sh
 
-      # 7. Deploy everything to S3
-      - name: Sync to S3
+      # 5. Sync the build folder to S3
+      - name: Upload build/ to S3
         uses: jakejarvis/s3-sync-action@master
         with:
-          args: --acl public-read --delete deploy-package/ s3://david-portfolio-site/
+          args: --acl public-read --delete
         env:
           AWS_S3_BUCKET: david-portfolio-site
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
-          SOURCE_DIR: "deploy-package/"
+          SOURCE_DIR: "./build"
