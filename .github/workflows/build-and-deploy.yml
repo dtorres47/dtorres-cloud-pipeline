@@ -1,49 +1,61 @@
-name: Build & Deploy
+name: Build & Deploy Site & Stream-Overlay
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Check out your portfolio-site repo
-      - name: Checkout code
+      # 1. Check out your code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Install Go
+      # 2. (If you have a Hugo site) Set up Hugo and build it
+      #- name: Setup Hugo
+      #  uses: peaceiris/actions-hugo@v2
+      #  with:
+      #    hugo-version: '0.118.0'
+      #- name: Build Hugo site
+      #  run: hugo --minify
+
+      # 3. Set up Go for your stream-overlay build
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
           go-version: '1.24.x'
 
-      # 3. Build your stream-overlay app
-      - name: Build stream-overlay
+      # 4. Make sure build.sh is executable
+      - name: Enable build script
+        run: chmod +x ./build.sh
+
+      # 5. Run your build script (compiles Go & copies static demo assets)
+      - name: Build stream-overlay demo
+        run: ./build.sh
+
+      # 6. Prepare a unified public folder
+      - name: Assemble public folder
         run: |
-          go mod tidy
-          go build -o build/stream-overlay-server ./cmd/stream-overlay
+          # Hugo output goes to public/
+          rm -rf deploy-package
+          mkdir -p deploy-package
+          cp -R public/* deploy-package/
+          # Copy your overlay demo into a subfolder
+          mkdir -p deploy-package/overlay-demo
+          cp build/stream-overlay-server deploy-package/overlay-demo/
+          cp -R build/stream-overlay-web/* deploy-package/overlay-demo/
 
-      # 4. Copy static assets (overlay.html, panel.html)
-      - name: Copy static web files
-        run: |
-          mkdir -p build/stream-overlay-web
-          cp -R cmd/stream-overlay/web/* build/stream-overlay-web/
-
-      # 5. Write a short VERSION file
-      - name: Write VERSION file
-        run: echo "$(git rev-parse --short HEAD)" > build/VERSION
-
-      # 6. Deploy to AWS S3
-      - name: Deploy to AWS
-        if: success()
+      # 7. Deploy everything to S3
+      - name: Sync to S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --delete deploy-package/ s3://david-portfolio-site/
         env:
-          AWS_REGION: us-east-1                          # ← set your bucket’s region
+          AWS_S3_BUCKET: david-portfolio-site
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          # Sync static web files
-          aws s3 sync build/stream-overlay-web s3://your-bucket-name/web
-          # Upload the Go server binary
-          aws s3 cp build/stream-overlay-server s3://your-bucket-name/bin/stream-overlay-server
+          AWS_REGION: us-east-1
+          SOURCE_DIR: "deploy-package/"
